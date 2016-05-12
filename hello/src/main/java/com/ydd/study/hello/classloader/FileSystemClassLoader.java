@@ -5,7 +5,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
+/**
+ * 重载了loadClass()方法
+ * @author Administrator
+ *
+ */
 public class FileSystemClassLoader extends ClassLoader {
 	private String rootDir; 
 
@@ -22,6 +26,19 @@ public class FileSystemClassLoader extends ClassLoader {
             return defineClass(name, classData, 0, classData.length); 
         } 
     } 
+    @Override
+    public Class<?> loadClass(String name)
+    {
+    	try {
+			return  findClass(name);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+    	
+    	
+    }
 
     private byte[] getClassData(String className) { 
         String path = classNameToPath(className); 
