@@ -30,6 +30,13 @@ public class FileSystemClassLoader extends ClassLoader {
     public Class<?> loadClass(String name)
     {
     	try {
+    		Class c = findLoadedClass(name);
+    		if(c!=null)
+    		{
+    			System.out.println("findLoadedClass:  found"+c);
+    			return c;
+    		}
+    		System.out.println("findLoadedClass not found:"+c);
 			return  findClass(name);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
